@@ -84,6 +84,7 @@ class PlayGame
   attr_accessor :board, :player1, :player2, :player_1_move, :player_2_move, :turn
 
   def initialize()
+    puts "let's play tic-tac-toe!"
     puts 'player 1 name?'
     @player1 = gets.chomp
     puts 'player 2 name?'
