@@ -8,6 +8,18 @@ module Text
     puts show_board
     puts "it's a draw!"
   end
+
+  def play_again
+    puts "do you want to play again? type 'y' for yes or 'n' for no"
+    answer = gets.chomp.downcase
+    if answer == 'y'
+      @turn = 0
+      @board = ['_', '_', '_', '_', '_', '_', '_', '_', '_', ]
+      start_game
+    else
+      puts "thanks for playing!"
+    end
+  end
 end
 
 # shows current status of the board and win conditions
@@ -20,7 +32,21 @@ module Board
   end
 
   def win_condition
-    @board[0, 3] == ['X', 'X', 'X'] 
+    winning_combos = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6],
+      [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]
+    ].freeze
+    x_win = ['X', 'X', 'X']
+    o_win = ['O', 'O', 'O']
+    winning_combos.any? do |combo|
+      if x_win == [@board[combo[0]], @board[combo[1]], @board[combo[2]]]
+        puts "#{player1} wins!"
+        true
+      elsif o_win == [@board[combo[0]], @board[combo[1]], @board[combo[2]]]
+        puts "#{player2} wins!"
+        true
+      end
+    end
   end
 end
 
@@ -81,6 +107,7 @@ class PlayGame
       end
     end
     puts show_board
+    play_again
   end
 end
 
